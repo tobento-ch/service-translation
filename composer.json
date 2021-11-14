@@ -1,0 +1,45 @@
+{
+    "name": "tobento/service-translation",
+    "type": "library",
+    "description": "Allowing you to support multiple languages within your application.",
+    "keywords": [
+        "tobento",
+        "package",
+        "translations"
+	],
+    "homepage": "https://www.tobento.ch",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tobias Strub",
+            "email": "info@tobento.ch",
+            "homepage": "https://www.tobento.ch"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.0",
+        "psr/log": "^1.1 || ^2.0 || ^3.0",
+        "tobento/service-filesystem": "^1.0",
+        "tobento/service-dir": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "vimeo/psalm": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tobento\\Service\\Translation\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tobento\\Service\\Translation\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit --testdox --colors=always",
+        "psalm": "vendor/bin/psalm"
+    }
+}
