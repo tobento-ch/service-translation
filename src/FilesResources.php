@@ -55,6 +55,10 @@ class FilesResources extends Resources
                 continue;
             }
             
+            if (!$this->isValidLocale($locale)) {
+                continue;
+            }
+            
             $this->loadedLocales[] = $locale;
             
             foreach($this->dirs->all() as $directory)
@@ -80,5 +84,16 @@ class FilesResources extends Resources
                 }
             }
         }
-    }    
+    }
+    
+    /**
+     * Returns true if the locale is valid, otherwise null.
+     *
+     * @param string $locale
+     * @return bool
+     */    
+    protected function isValidLocale(string $locale): bool
+    {
+        return (bool) preg_match('/^[a-zA-Z_-]{2,5}$/u', $locale);
+    }
 }
