@@ -247,10 +247,10 @@ class FilesResourcesTest extends TestCase
                 'usingKeywordMessage' => 'Shop - Using Keyword Messages',
             ],
             $resources->locale('en')->translations()
-        );     
+        );
     }
     
-    public function testTranslationsMethodWitSortByPriorityOverwrites()
+    public function testTranslationsMethodWithSortByPriorityOverwrites()
     {
         $resources = new FilesResources(
             (new Dirs())->dir(dir: __DIR__.'/trans/front/', group: 'front', priority: 10)
@@ -264,5 +264,20 @@ class FilesResourcesTest extends TestCase
             ],
             $resources->locale('en')->sort()->translations()
         );     
-    }    
+    }
+    
+    public function testTranslationsMethodWithDottedFilenamesAreMerged()
+    {
+        $resources = new FilesResources(
+            (new Dirs())->dir(dir: __DIR__.'/trans/front/', group: 'front', priority: 10)
+        );
+        
+        $this->assertSame(
+            [
+                'team' => 'team',
+                'about' => 'about',
+            ],
+            $resources->locale('en-US')->name('routes')->translations()
+        );
+    }
 }
