@@ -63,6 +63,8 @@ class ResourceFactory implements ResourceFactoryInterface
                     
         if (str_starts_with($file->getFilename(), $locale)) {
             $resourceName = '*';
+        } elseif (str_contains($file->getFilename(), '.')) {
+            $resourceName = explode('.', $file->getFilename())[0];
         }
         
         return new ResourceFile($file, $locale, $resourceName, $group, $priority);
