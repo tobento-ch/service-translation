@@ -590,8 +590,8 @@ var_dump($resources instanceof ResourcesInterface);
 
 ### Directory Structure
 
-Files starting with the locale are stored as "*" resource name. They are all fetched and merged together on the first translations request.\
-Files not starting with the locale are only loaded on the first resource request.
+Files starting with the locale are stored as ```*``` resource name. They are all fetched and merged together on the first translations request.\
+Files not starting with the locale are only loaded on the first resource request. Furthermore, files named like ```routes.shop.json``` and ```routes.blog.json``` are merged together as resource name ```routes```.
 
 ```
 private/
@@ -601,10 +601,13 @@ private/
             en.json
             en-shop.json
             shop.json
+            routes.shop.json
+            routes.blog.json
         de-CH/
             de-CH.json
             de-CH-shop.json
             shop.json
+            routes.shop.json
 ```
 
 ### Supported Files
