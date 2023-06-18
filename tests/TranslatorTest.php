@@ -173,7 +173,28 @@ class TranslatorTest extends TestCase
             ResourcesInterface::class,
             $translator->resources()
         );     
-    }    
+    }
+    
+    public function testWithResourcesMethod()
+    {
+        $translator = new Translator(
+            resources: new Resources(),
+            modifiers: new Modifiers(),
+            missingTranslationHandler: new MissingTranslationHandler(),
+            locale: 'en',
+            localeFallbacks: ['de' => 'fr'],
+            localeMapping: ['de' => 'de-CH'],
+        );
+        
+        $resources = new Resources();
+        
+        $translatorNew = $translator->withResources(
+            resources: $resources
+        );
+        
+        $this->assertFalse($translator === $translatorNew);
+        $this->assertTrue($resources === $translatorNew->resources());
+    }
     
     public function testThatImplementsModifiersAware()
     {
@@ -213,5 +234,26 @@ class TranslatorTest extends TestCase
             ModifiersInterface::class,
             $translator->modifiers()
         );     
-    }     
+    }
+    
+    public function testWithModifiersMethod()
+    {
+        $translator = new Translator(
+            resources: new Resources(),
+            modifiers: new Modifiers(),
+            missingTranslationHandler: new MissingTranslationHandler(),
+            locale: 'en',
+            localeFallbacks: ['de' => 'fr'],
+            localeMapping: ['de' => 'de-CH'],
+        );
+        
+        $modifiers = new Modifiers();
+        
+        $translatorNew = $translator->withModifiers(
+            modifiers: $modifiers
+        );
+        
+        $this->assertFalse($translator === $translatorNew);
+        $this->assertTrue($modifiers === $translatorNew->modifiers());
+    }
 }
