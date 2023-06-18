@@ -36,6 +36,19 @@ trait HasModifiers
     }
     
     /**
+     * Returns a new instance with the specified modifiers.
+     *
+     * @param ModifiersInterface $modifiers
+     * @return static
+     */
+    public function withModifiers(ModifiersInterface $modifiers): static
+    {
+        $new = clone $this;
+        $new->modifiers = $modifiers;
+        return $new;
+    }
+    
+    /**
      * Returns the modifiers.
      *
      * @return ModifiersInterface
