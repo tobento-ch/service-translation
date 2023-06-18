@@ -180,7 +180,7 @@ class Translator implements
             return $this->trans[$resource][$locale];
         }
 
-        return $this->trans[$resource][$locale] = $this->resources->locale($locale)->name($resource)->translations();
+        return $this->trans[$resource][$locale] = $this->resources->locale($locale)->name($resource)->sort()->translations();
     }    
             
     /**
