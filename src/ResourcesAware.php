@@ -26,6 +26,14 @@ interface ResourcesAware
     public function resources(): ResourcesInterface;
     
     /**
+     * Returns a new instance with the specified resources.
+     *
+     * @param ResourcesInterface $resources
+     * @return static
+     */
+    public function withResources(ResourcesInterface $resources): static;
+    
+    /**
      * Returns the translations of the specified resource.
      *
      * @param string $name The resource name.
