@@ -24,4 +24,12 @@ interface ModifiersAware
      * @return ModifiersInterface
      */
     public function modifiers(): ModifiersInterface;
+    
+    /**
+     * Returns a new instance with the specified modifiers.
+     *
+     * @param ModifiersInterface $modifiers
+     * @return static
+     */
+    public function withModifiers(ModifiersInterface $modifiers): static;
 }
