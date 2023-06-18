@@ -36,6 +36,19 @@ trait HasResources
     }
     
     /**
+     * Returns a new instance with the specified resources.
+     *
+     * @param ResourcesInterface $resources
+     * @return static
+     */
+    public function withResources(ResourcesInterface $resources): static
+    {
+        $new = clone $this;
+        $new->resources = $resources;
+        return $new;
+    }
+    
+    /**
      * Returns the resources.
      *
      * @return ResourcesInterface
