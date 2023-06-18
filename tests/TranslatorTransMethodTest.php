@@ -323,5 +323,39 @@ class TranslatorTransMethodTest extends TestCase
             'Hi John',
             $translated
         );
-    }    
+    }
+    
+    public function testResourcesAreSortedByPriorityByDefault()
+    {
+        $translator = new Translator(
+            resources: new Resources(
+                new Resource(
+                    name: '*', 
+                    locale: 'en',
+                    translations: ['message' => 'message 10'],
+                    priority: 10,
+                ),
+                new Resource(
+                    name: '*', 
+                    locale: 'en',
+                    translations: ['message' => 'message 50'],
+                    priority: 50,
+                ),
+                new Resource(
+                    name: '*', 
+                    locale: 'en',
+                    translations: ['message' => 'message 20'],
+                    priority: 20,
+                ),
+            ),
+            modifiers: new Modifiers(),
+            missingTranslationHandler: new MissingTranslationHandler(),
+            locale: 'en',
+        );
+
+        $this->assertSame(
+            'message 50',
+            $translator->trans(message: 'message')
+        );
+    }
 }
