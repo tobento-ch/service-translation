@@ -186,6 +186,11 @@ $translations = $translator->getResource(
 
 var_dump($translations);
 // array(1) { ["Hello World"]=> string(10) "Hallo Welt" }
+
+// returns a new instance with the specified resources:
+$translator = $translator->withResources(
+    resources: $resources // ResourcesInterface
+);
 ```
 
 **Modifiers Aware**
@@ -199,6 +204,11 @@ use Tobento\Service\Translation\ModifiersInterface;
 // get the modifiers:
 var_dump($translator->modifiers() instanceof ModifiersInterface);
 // bool(true)
+
+// returns a new instance with the specified modifiers:
+$translator = $translator->withModifiers(
+    modifiers: $modifiers // ModifiersInterface
+);
 ```
 
 ### Translate Message
@@ -246,6 +256,8 @@ $translated = $translator->trans(
 var_dump($translated);
 // string(19) "Es dauert 5 Minuten"
 ```
+
+By default, resources will be sorted by its priority!
 
 **Using specific resource**
 
