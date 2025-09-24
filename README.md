@@ -40,7 +40,7 @@ composer require tobento/service-translation
 
 ## Requirements
 
-- PHP 8.0 or greater
+- PHP 8.4 or greater
 
 ## Highlights
 
@@ -593,7 +593,7 @@ use Tobento\Service\Dir\Dirs;
 use Tobento\Service\Translation\ResourcesInterface;
 
 $resources = new FilesResources(
-    (new Dirs())->dir(dir: 'private/trans/', group: 'front', priority: 10)
+    new Dirs()->dir(dir: 'private/trans/', group: 'front', priority: 10)
 );
 
 var_dump($resources instanceof ResourcesInterface);
@@ -681,7 +681,7 @@ class CustomResourceFactory extends ResourceFactory
 }
 
 $resources = new FilesResources(
-    (new Dirs())->dir(dir: 'private/trans/', group: 'front', priority: 10),
+    new Dirs()->dir(dir: 'private/trans/', group: 'front', priority: 10),
     new CustomResourceFactory()
 );
 ```
