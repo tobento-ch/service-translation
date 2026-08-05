@@ -1,6 +1,6 @@
 {
     "name": "tobento/service-translation",
-    "version": "2.0",
+    "version": "2.0.1",
     "type": "library",
     "description": "Allowing you to support multiple languages within your application.",
     "keywords": [
@@ -27,7 +27,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^12.3",
-        "vimeo/psalm": "^6.13"
+        "vimeo/psalm": "^6.13",
+        "monolog/monolog": "^3.9"
     },
     "autoload": {
         "psr-4": {
