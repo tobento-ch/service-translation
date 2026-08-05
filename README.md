@@ -27,6 +27,9 @@ With the Translation Service you can translate messages easily.
         - [Pluralization](#pluralization)
         - [Parameter Replacer](#parameter-replacer)
     - [Missing Translation Handler](#missing-translation-handler)
+        - [Chain Handler](#chain-handler)
+        - [Log Handler](#log-handler)
+        - [Null Handler](#null-handler)
 - [Credits](#credits)
 ___
 
@@ -814,6 +817,89 @@ $translator = new Translator(
 
 var_dump($translator->trans('Hello World'));
 ```
+
+In addition to the default handler, the translation service provides several named handlers under  
+`Tobento\Service\Translation\MissingHandler\`.
+
+### Chain Handler
+
+The `Chain` handler allows you to combine multiple handlers and execute them in sequence.  
+Each handler receives the translation returned by the previous one.
+
+```php
+use Psr\Log\LoggerInterface;
+use Tobento\Service\Translation\MissingHandler;
+use Tobento\Service\Translation\Modifiers;
+use Tobento\Service\Translation\Resource;
+use Tobento\Service\Translation\Resources;
+use Tobento\Service\Translation\Translator;
+
+$translator = new Translator(
+    new Resources(
+        new Resource('*', 'de', [
+            'Hello World' => 'Hallo Welt',
+        ]),
+    ),
+    new Modifiers(),
+    new MissingHandler\Chain(
+        new MissingHandler\Log($logger), // any PSR-3 logger
+    ),
+);
+
+var_dump($translator->trans('Hello World'));
+```
+
+This enables flexible combinations such as logging, storing, auto-translation, depending on your application needs.
+
+### Log Handler
+
+A logging handler that simply extends the default handler:
+
+```php
+use Psr\Log\LoggerInterface;
+use Tobento\Service\Translation\MissingHandler;
+use Tobento\Service\Translation\Modifiers;
+use Tobento\Service\Translation\Resource;
+use Tobento\Service\Translation\Resources;
+use Tobento\Service\Translation\Translator;
+
+$translator = new Translator(
+    new Resources(
+        new Resource('*', 'de', [
+            'Hello World' => 'Hallo Welt',
+        ]),
+    ),
+    new Modifiers(),
+    new MissingHandler\Log($logger), // any PSR-3 logger
+);
+
+var_dump($translator->trans('Hello World'));
+```
+
+### Null Handler
+
+A handler that performs no action for missing translations:
+
+```php
+use Tobento\Service\Translation\MissingHandler;
+use Tobento\Service\Translation\Modifiers;
+use Tobento\Service\Translation\Resource;
+use Tobento\Service\Translation\Resources;
+use Tobento\Service\Translation\Translator;
+
+$translator = new Translator(
+    new Resources(
+        new Resource('*', 'de', [
+            'Hello World' => 'Hallo Welt',
+        ]),
+    ),
+    new Modifiers(),
+    new MissingHandler\NullHandler(),
+);
+
+var_dump($translator->trans('Hello World'));
+```
+
 # Credits
 
 - [Tobias Strub](https://www.tobento.ch)
