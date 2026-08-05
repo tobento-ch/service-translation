@@ -26,7 +26,7 @@ class MissingTranslationHandler implements MissingTranslationHandlerInterface
      * @param null|LoggerInterface $logger
      */    
     public function __construct(
-        protected null|LoggerInterface $logger = null
+        private null|LoggerInterface $logger = null
     ) {}
     
     /**
